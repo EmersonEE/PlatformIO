@@ -11,8 +11,10 @@ class PantallitaXD
 public:
     PantallitaXD();
     void init();
-    void printData(float &data1, float &data2, float &data3, float &data4, int &steps1, int &steps2, int *direcction);
 
+    int obtnergrados(int *pasos, int min, int max, int ming, int maxg);
+    void printData(float &data1, float &data2, float &data3, float &data4, int &steps1, int &steps2, int *direcction);
+    void printConfMode(int &gradeX, int &gradeY, int *direcction);
 private:
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels

@@ -128,11 +128,11 @@ void PantallitaXD::printData(float &data1, float &data2, float &data3, float &da
     display.setCursor(25, 49);
     display.println(data4);
     display.setCursor(64, 16);
-    display.println("StX= ");
+    display.println("GX= ");
     display.setCursor(89, 16);
     display.println(steps1);
     display.setCursor(64, 27);
-    display.println("StY= ");
+    display.println("GY= ");
     display.setCursor(89, 27);
     display.println(steps2);
     display.setCursor(80, 44);
@@ -143,4 +143,48 @@ void PantallitaXD::printData(float &data1, float &data2, float &data3, float &da
     display.write(3);
     display.display();
     display.clearDisplay();
+}
+
+/// @brief Impreme los grados en el modo configuracion.
+/// @param gradeX Variable que contiene el valor de los grados en el eje X.
+/// @param gradeY Variable que contiene el valor de los grados en el eje Y.
+/// @param direcction Puntero que conteiene la direccion del motor.
+/// @details Muestra los valores de los grados en el eje X y Y, junto con la dirección del motor.
+void PantallitaXD::printConfMode(int &gradeX, int &gradeY, int *direcction)
+{
+
+    display.setTextSize(1);
+    display.setTextColor(WHITE);
+    display.setCursor(20, 0);
+    display.println("Solar Tracker");
+    display.setCursor(10, 18);
+    display.println("MODO CONFIGURACION");
+    display.setCursor(0, 35);
+    display.println("GX= ");
+    display.setCursor(25, 35);
+    display.println(gradeX);
+    display.setCursor(0, 46);
+    display.println("GY= ");
+    display.setCursor(25, 46);
+    display.println(gradeY);
+    display.setCursor(80, 44);
+    display.setTextSize(3);
+    display.write(*direcction);
+    display.setCursor(100, 0);
+    display.setTextSize(2);
+    display.write(3);
+    display.display();
+    display.clearDisplay();
+}
+
+/// @brief        Convierte el valor de los pasos a grados
+/// @param pasos  variable que contiene el valor a mapear
+/// @param min    valor minimo de la variable de pasos
+/// @param max    valor maximo de la variable de pasos
+/// @param ming   valor minimo de grados a mostrar
+/// @param maxg   valor maximo de grados a mostrar
+/// @return
+int PantallitaXD::obtnergrados(int *pasos, int min, int max, int ming, int maxg)
+{
+    return map(*pasos, min, max, ming, maxg);
 }
