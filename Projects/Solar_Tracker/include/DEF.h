@@ -19,6 +19,13 @@
 #define LED_CONF 26
 #define LED_LDR 25
 
+#define MIN_STEP_X -360
+#define MAX_STEP_X 360
+
+#define MIN_STEP_Y 0
+#define MAX_STEP_Y 300
+
+
 
 
 // 24: ↑ (Flecha hacia arriba)

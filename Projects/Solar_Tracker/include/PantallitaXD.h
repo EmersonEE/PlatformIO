@@ -12,7 +12,7 @@ public:
     PantallitaXD();
     void init();
 
-    int obtnergrados(int *pasos, int min, int max, int ming, int maxg);
+    int StepsToDegrees(int *pasos, int min, int max, int ming, int maxg);
     void printData(float &data1, float &data2, float &data3, float &data4, int &steps1, int &steps2, int *direcction);
     void printConfMode(int &gradeX, int &gradeY, int *direcction);
 private:

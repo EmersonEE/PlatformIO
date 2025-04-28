@@ -178,13 +178,13 @@ void PantallitaXD::printConfMode(int &gradeX, int &gradeY, int *direcction)
 }
 
 /// @brief        Convierte el valor de los pasos a grados
-/// @param pasos  variable que contiene el valor a mapear
-/// @param min    valor minimo de la variable de pasos
-/// @param max    valor maximo de la variable de pasos
-/// @param ming   valor minimo de grados a mostrar
-/// @param maxg   valor maximo de grados a mostrar
+/// @param pasos  Puntero que contiene el valor a mapear
+/// @param min    Valor minimo de la variable de pasos
+/// @param max    Valor maximo de la variable de pasos
+/// @param ming   Valor minimo de grados a mostrar
+/// @param maxg   Valor maximo de grados a mostrar
 /// @return
-int PantallitaXD::obtnergrados(int *pasos, int min, int max, int ming, int maxg)
+int PantallitaXD::StepsToDegrees(int *pasos, int min, int max, int ming, int maxg)
 {
     return map(*pasos, min, max, ming, maxg);
 }
