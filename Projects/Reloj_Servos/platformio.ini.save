@@ -1,0 +1,22 @@
+; PlatformIO Project Configuration File
+;
+;   Build options: build flags, source filter
+;   Upload options: custom upload port, speed and extra flags
+;   Library options: dependencies, extra library storages
+;   Advanced options: extra scripting
+;
+; Please visit documentation for the other options and examples
+; https://docs.platformio.org/page/projectconf.html
+
+[env:uno]
+platform = atmelavr
+board = uno
+framework = arduino
+monitor_speed = 115200
+lib_deps = 
+	naguissa/uRTCLib@^6.9.3
+	northernwidget/DS3231@^1.1.2
+	jchristensen/Timezone@^1.2.5
+	; mbed-bxd/Adafruit_PWMServoDriver@0.0.0+sha.41a00db32ae7
+	; mbed-somerandombloke/Adafruit_PWMServoDriver@0.0.0+sha.9ff15661ddd6
+	
