@@ -19,7 +19,7 @@ void app_main()
 
     while (true)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {   
             printf("LED ON\n");
             gpio_set_level(LED_PIN, 1);
