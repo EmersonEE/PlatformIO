@@ -3,6 +3,7 @@
 #include <WiFiMulti.h>
 #include <PantallitaXD.h>
 #include "MSM.h"
+#include "PWM.h"
 PantallitaXD pantalla;
 WiFiMulti wifiMulti;
 #else
@@ -10,10 +11,10 @@ WiFiMulti wifiMulti;
 #include <ESP8266WiFiMulti.h>
 ESP8266WiFiMulti wifiMulti;
 #endif
-
+PWM pwm(27);
 #include <MQTT.h>
 #include "data.h" // Aquí debes definir: ssid_1, password_1, etc.
-
+#define LONGITUD_CARNET 9 // Longitud esperada del carnet
 WiFiClient net;
 MQTTClient clienteMQTT;
 
@@ -48,23 +49,40 @@ void manejarMensajeSuscribirse(const String &payload)
 
 void manejarMensajePantalla(const String &payload)
 {
-
-  if (payload != payload_anterior && payload.length() ==9)
+  // Validación más robusta
+  if (payload.length() != LONGITUD_CARNET)
   {
-    Serial.println(payload);
-    payload_anterior = payload;
-    pantalla.showCarnet(payload);
-  }
-  else if (payload.length() <= 8 || payload.length() > 9)
-  {
-    
     pantalla.showCarnetError(payload);
-  }
-  else
-  {
-    Serial.println("Mensaje repetido, no se actualiza pantalla");
+    Serial.printf("Longitud inválida: %d, esperado: %d\n", payload.length(), LONGITUD_CARNET);
     return;
   }
+
+  // Verificar si es numérico (dependiendo de requisitos)
+  for (char c : payload)
+  {
+    if (!isdigit(c))
+    {
+      pantalla.showCarnetError(payload);
+      Serial.println("Contenido no numérico");
+      return;
+    }
+  }
+
+  if (payload.equals(payload_anterior))
+  {
+    Serial.println("Mensaje repetido, ignorado");
+    return;
+  }
+
+  payload_anterior = payload;
+  pantalla.showCarnet(payload);
+  Serial.println("Pantalla actualizada: " + payload);
+}
+
+void brillo(const String &payload)
+{
+  // pantalla.showCarnet(payload);
+  pwm.ledPWM(String(payload).toInt());
 }
 
 void MensajeMQTT(String topic, String payload)
@@ -82,6 +100,10 @@ void MensajeMQTT(String topic, String payload)
   {
     manejarMensajePantalla(payload);
   }
+  else if (topic == "/brillo")
+  {
+    brillo(payload);
+  }
   else
   {
     Serial.println("Tópico no manejado");
@@ -90,14 +112,24 @@ void MensajeMQTT(String topic, String payload)
 
 void conectar()
 {
+  const unsigned long timeoutWiFi = 30000; // 30 segundos timeout
+  unsigned long inicio = millis();
+
   Serial.print("Conectando con WiFi...");
-  while (wifiMulti.run() != WL_CONNECTED)
+  while (wifiMulti.run() != WL_CONNECTED && millis() - inicio < timeoutWiFi)
   {
+    // Feedback visual mejorado
+    static uint8_t counter = 0;
     Serial.print(".");
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(100);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(100);
+    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
+    delay(250 + (counter++ % 3) * 100); // Patrón de espera variable
+  }
+
+  if (WiFi.status() != WL_CONNECTED)
+  {
+    Serial.println("\nFallo en conexión WiFi");
+    ESP.restart(); // O manejar de otra manera
+    return;
   }
 
   Serial.println("\nConectado a WiFi: " + WiFi.SSID());
@@ -117,6 +149,7 @@ void conectar()
   // ✅ Suscripciones
   clienteMQTT.subscribe("/leds");
   clienteMQTT.subscribe("/pantalla");
+  clienteMQTT.subscribe("/brillo");
 }
 
 void setup()
@@ -124,6 +157,7 @@ void setup()
   Serial.begin(115200);
   pantalla.init();
   pantalla.showMessage("Iniciando...");
+  pwm.init(0, 5000, 8); // Inicializa PWM en el canal 0, frecuencia 5000 Hz, resolución 8 bits
 
   pinMode(LED_BUILTIN, OUTPUT);
   pinMode(ledazul, OUTPUT);
@@ -159,6 +193,6 @@ void loop()
   {
     tiempoAnterior = millis();
     int valor = map(analogRead(pot), 0, 4095, 0, 100);
-    clienteMQTT.publish("/saludo", String(valor));
+    // clienteMQTT.publish("/brillo", String(valor));
   }
 }
