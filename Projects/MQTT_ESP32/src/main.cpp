@@ -11,9 +11,10 @@ WiFiMulti wifiMulti;
 #include <ESP8266WiFiMulti.h>
 ESP8266WiFiMulti wifiMulti;
 #endif
-PWM pwm(27);
+PWM pwm(4);
+
 #include <MQTT.h>
-#include "data.h" // Aquí debes definir: ssid_1, password_1, etc.
+#include "data.h"         // Aquí debes definir: ssid_1, password_1, etc.
 #define LONGITUD_CARNET 9 // Longitud esperada del carnet
 WiFiClient net;
 MQTTClient clienteMQTT;
@@ -26,25 +27,44 @@ unsigned long tiempoAnterior = 0;
 unsigned long ultimoReintento = 0;
 const unsigned long intervaloReintento = 5000; // 5 segundos
 String payload_anterior = "";
-int ledazul = 14;
+int LED_OK = 14;
+int LED_ERROR = 12;
+int BUZZER = 27;
+unsigned long tiempoDeApagado = 0;
+bool esperandoApagar = false;
 
 void manejarMensajeSuscribirse(const String &payload)
 {
   if (payload == "0")
   {
-    digitalWrite(ledazul, HIGH);
+    digitalWrite(LED_OK, HIGH);
+    digitalWrite(LED_ERROR, LOW);
+    digitalWrite(BUZZER, HIGH);
     Serial.println("LED azul ENCENDIDO");
     delay(1500);
   }
   else if (payload == "1")
   {
-    digitalWrite(ledazul, LOW);
+    digitalWrite(LED_OK, LOW);
+    digitalWrite(LED_ERROR, HIGH);
+    digitalWrite(BUZZER, LOW);
     Serial.println("LED azul APAGADO");
+  }
+  else if (payload == "2")
+  {
+    digitalWrite(LED_OK, LOW);
+    digitalWrite(LED_ERROR, LOW);
+    digitalWrite(BUZZER, LOW);
   }
   else
   {
     Serial.println("Payload inválido en /leds");
+    digitalWrite(LED_OK, LOW);
+    digitalWrite(LED_ERROR, LOW);
+    digitalWrite(BUZZER, LOW);
   }
+  tiempoDeApagado = millis() + 1500;
+  esperandoApagar = true;
 }
 
 void manejarMensajePantalla(const String &payload)
@@ -82,7 +102,9 @@ void manejarMensajePantalla(const String &payload)
 void brillo(const String &payload)
 {
   // pantalla.showCarnet(payload);
-  pwm.ledPWM(String(payload).toInt());
+  int pw = map(String(payload).toInt(), 0, 100, 0, 255);
+  pwm.ledPWM(pw);
+  // pwm2.ledPWM(String(payload).toInt());
 }
 
 void MensajeMQTT(String topic, String payload)
@@ -103,6 +125,7 @@ void MensajeMQTT(String topic, String payload)
   else if (topic == "/brillo")
   {
     brillo(payload);
+    Serial.println("Brillo ajustado: " + payload);
   }
   else
   {
@@ -158,11 +181,13 @@ void setup()
   pantalla.init();
   pantalla.showMessage("Iniciando...");
   pwm.init(0, 5000, 8); // Inicializa PWM en el canal 0, frecuencia 5000 Hz, resolución 8 bits
-
   pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(ledazul, OUTPUT);
-  digitalWrite(ledazul, LOW);
-  pinMode(pot, INPUT);
+  pinMode(LED_OK, OUTPUT);
+  pinMode(LED_ERROR, OUTPUT);
+  pinMode(BUZZER, OUTPUT);
+  digitalWrite(LED_OK, LOW);
+  digitalWrite(LED_ERROR, LOW);
+  digitalWrite(BUZZER, LOW);
 
   wifiMulti.addAP(ssid_1, password_1);
   wifiMulti.addAP(ssid_2, password_2);
@@ -189,10 +214,12 @@ void loop()
     return;
   }
 
-  if (millis() - tiempoAnterior > 1000)
+  if (esperandoApagar && millis() >= tiempoDeApagado)
   {
-    tiempoAnterior = millis();
-    int valor = map(analogRead(pot), 0, 4095, 0, 100);
-    // clienteMQTT.publish("/brillo", String(valor));
+    digitalWrite(LED_OK, LOW);
+    digitalWrite(LED_ERROR, LOW);
+    digitalWrite(BUZZER, LOW);
+    esperandoApagar = false;
+    Serial.println("Componentes apagados automáticamente");
   }
 }
