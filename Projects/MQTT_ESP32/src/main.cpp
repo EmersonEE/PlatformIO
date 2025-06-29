@@ -219,7 +219,9 @@ void loop()
     digitalWrite(LED_OK, LOW);
     digitalWrite(LED_ERROR, LOW);
     digitalWrite(BUZZER, LOW);
+    pantalla.showCarnetError("Marque Asistencia");
     esperandoApagar = false;
     Serial.println("Componentes apagados automáticamente");
+
   }
 }
