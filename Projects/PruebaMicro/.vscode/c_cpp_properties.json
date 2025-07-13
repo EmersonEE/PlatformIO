@@ -1,0 +1,56 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/home/emerson/Documentos/PlatformIO/Projects/PruebaMicro/src",
+                "/home/emerson/Documentos/PlatformIO/Projects/PruebaMicro/include",
+                "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard",
+                "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/emerson/Documentos/PlatformIO/Projects/PruebaMicro/src",
+                    "/home/emerson/Documentos/PlatformIO/Projects/PruebaMicro/include",
+                    "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino",
+                    "/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard",
+                    "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60118",
+                "ARDUINO_AVR_UNO",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "__AVR_ATmega328P__",
+                ""
+            ],
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++11",
+            "compilerPath": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc",
+            "compilerArgs": [
+                "-mmcu=atmega328p",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
