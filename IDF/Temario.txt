@@ -1,0 +1,88 @@
+Módulo 1: Fundamentos del ESP-IDF
+Clase 1 – Introducción al entorno ESP-IDF
+
+Instalación y configuración de PlatformIO
+
+Estructura de un proyecto ESP-IDF
+
+Primera compilación y carga del firmware
+
+Clase 2 – GPIO: Entradas digitales
+
+Lectura de botones
+
+Pull-up y pull-down internos
+
+Clase 3 – GPIO: Salidas digitales
+
+Control de LEDs
+
+Estados HIGH y LOW
+
+Clase 4 – Lógica condicional y estructuras de control
+
+if, else, switch
+
+Uso de condiciones con entradas digitales
+
+Clase 5 – Bucles y temporización
+
+for, while
+
+vTaskDelay, esp_timer
+
+Módulo 2: Salidas avanzadas
+Clase 6 – PWM y control de brillo con LEDC
+
+Configuración del periférico LEDC
+
+Variar intensidad de un LED
+
+Frecuencia y resolución
+
+Clase 7 – PWM para motores DC y servos
+
+Control de velocidad
+
+Servo motor con ciclo de trabajo específico
+
+Módulo 3: Comunicación
+Clase 8 – Comunicación serial UART
+
+Enviar y recibir datos desde el puerto serie
+
+Terminal serial en PlatformIO
+
+Clase 9 – Comunicación I2C
+
+Lectura de sensores I2C (por ejemplo, BMP280, MPU6050)
+
+Escaneo de direcciones
+
+Módulo 4: Conectividad WiFi
+Clase 10 – Introducción al WiFi con ESP-IDF
+
+Conexión a redes WiFi
+
+Verificación de estado de red
+
+Clase 11 – Cliente HTTP: consumir APIs
+
+Realizar solicitudes HTTP GET
+
+Mostrar resultados por UART
+
+Clase 12 – Servidor web básico en ESP32
+
+Servir una página HTML desde el ESP
+
+Controlar GPIOs desde el navegador
+
+📦 Extras (opcionales o futuros)
+Clase 13 – Uso de FreeRTOS: tareas, colas y semáforos
+
+Clase 14 – Comunicación SPI
+
+Clase 15 – Actualización OTA (Over-the-Air)
+
+Clase 16 – Lectura de sensores analógicos (ADC)

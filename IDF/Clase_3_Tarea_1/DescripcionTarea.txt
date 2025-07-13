@@ -1,0 +1,11 @@
+Ejercicio 3 – Alternancia de estado con botón
+Combina lo aprendido en las clases 2 y 3:
+
+Usa un botón en el GPIO4 (como entrada con pull-up).
+Usa un LED en el GPIO5 (como salida).
+Al presionar el botón, cambia el estado del LED (encendido ↔ apagado).
+Ejemplo de comportamiento esperado:
+
+Inicia con LED apagado.
+Presiona el botón → LED encendido.
+Vuelve a presionar → LED apagado.

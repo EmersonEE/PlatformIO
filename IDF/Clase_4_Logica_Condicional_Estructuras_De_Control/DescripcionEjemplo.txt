@@ -1,0 +1,11 @@
+✅ Ejemplo Práctico: Lógica con Entrada Digital
+Vamos a usar un botón conectado a GPIO_NUM_34 (entrada con pull-down) y un LED en GPIO_NUM_27. El comportamiento será:
+
+Un clic : Encender/apagar el LED.
+Dos clics seguidos : Parpadear rápido 3 veces.
+Tres clics seguidos : Parpadear continuamente hasta nuevo evento.
+Este ejemplo combina:
+
+Detección de flanco
+Medición de tiempo entre pulsos
+Uso de if/else anidados

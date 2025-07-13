@@ -1,0 +1,16 @@
+💡 Tarea Práctica
+Ejercicio 4 – Modificar el Comportamiento
+Haz lo siguiente:
+
+Cambia la lógica para que:
+Un clic corto → encienda/apague el LED
+
+Un clic largo (>1 segundo) → active un modo especial (por ejemplo,
+parpadeo lento)
+
+💡 Pista: Usa xTaskGetTickCount() al inicio y al final
+de la presión del botón para calcular la duración.
+
+Cuando termines, envíame tu código y te daré 
+retroalimentación detallada.
+

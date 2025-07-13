@@ -1,0 +1,10 @@
+💡 Tarea Práctica
+Ejercicio 6 – Contador con Delay No Bloqueante
+Haz lo siguiente:
+
+Crea un contador que aumente cada 2 segundos .
+Muestra su valor por consola.
+Hazlo usando esp_timer_get_time() y sin usar vTaskDelay.
+Puedes usar una variable ultimoTiempo y compararla con ahora en cada iteración del bucle principal.
+
+Cuando termines, envíame tu código y te daré retroalimentación detallada.
