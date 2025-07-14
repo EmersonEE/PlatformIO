@@ -1,0 +1,11 @@
+💡 Tarea Práctica
+Ejercicio 9 – Control de brillo con potenciómetro
+Haz lo siguiente:
+
+Usa el valor leído del potenciómetro como ciclo de trabajo (duty) para el PWM.
+Conecta el potenciómetro a un canal ADC.
+Usa LEDC para controlar un LED.
+El brillo del LED debe cambiar según la posición del potenciómetro.
+Puedes reusar partes del ejemplo de LEDC y ADC.
+
+Cuando termines, envíame tu código y te daré retroalimentación detallada.
