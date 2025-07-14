@@ -1,0 +1,10 @@
+💡 Tarea Práctica
+Ejercicio 8 – Control de brillo con botón
+Haz lo siguiente:
+
+Usa un botón conectado a GPIO_NUM_4.
+Al presionarlo, aumenta el brillo del LED en pasos de 500 (ej: 0, 500, 1000...).
+Si llega al máximo (8191), reinicia a 0.
+Puedes reusar parte del código anterior y combinarlo con lo aprendido en las clases anteriores sobre entrada digital.
+
+Cuando termines, envíame tu código y te daré retroalimentación detallada.
