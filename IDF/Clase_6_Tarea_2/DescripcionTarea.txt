@@ -1,0 +1,9 @@
+🎯 Nueva Tarea – Brillo progresivo con botón (Fade Manual)
+Haz lo siguiente:
+
+Usa un botón para aumentar gradualmente el brillo del LED en pasos pequeños (ej: +10 cada vez que se presione).
+Si llega al máximo (8191), reinicia a 0.
+En lugar de saltos grandes, haz que el aumento sea suave (usando un bucle).
+💡 Pista: dentro del evento de pulsación del botón, puedes usar un bucle for que vaya desde el duty actual hasta el nuevo valor, actualizando cada paso con un pequeño delay.
+
+Cuando termines, envíame tu código y te daré retroalimentación detallada.
