@@ -11,9 +11,9 @@ extern "C" void app_main();
 void app_main()
 {
 
-    constexpr gpio_num_t RED = GPIO_NUM_12;
-    constexpr gpio_num_t GREEN = GPIO_NUM_14;
-    constexpr gpio_num_t BLUE = GPIO_NUM_27;
+    constexpr gpio_num_t RED = GPIO_NUM_17;
+    constexpr gpio_num_t GREEN = GPIO_NUM_16;
+    constexpr gpio_num_t BLUE = GPIO_NUM_4;
     RGB ledRGB(RED, GREEN, BLUE);
 
     while (true)
@@ -30,7 +30,7 @@ void app_main()
             ledRGB.seleColor(RGB::RED);
             vTaskDelay(pdMS_TO_TICKS(100));
             ledRGB.seleColor(RGB::VIOLET);
-            vTaskDelay(pdMS_TO_TICKS(100));
+            vTaskDelay(pdMS_TO_TICKS(5000));
             ledRGB.ledOff();
             vTaskDelay(pdMS_TO_TICKS(200));
         }

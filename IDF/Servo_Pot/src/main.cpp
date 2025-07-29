@@ -43,7 +43,7 @@ void app_main()
         vTaskDelay(pdMS_TO_TICKS(250));
         servo.setAngle(180);
         vTaskDelay(pdMS_TO_TICKS(250));
-           servo.setAngle(135);
+        servo.setAngle(135);
         vTaskDelay(pdMS_TO_TICKS(250));
         servo.setAngle(90);
         vTaskDelay(pdMS_TO_TICKS(250));
