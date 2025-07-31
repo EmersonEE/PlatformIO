@@ -34,7 +34,8 @@ int MyADC::MyADC_getRaw()
 
 MyADC::~MyADC()
 {
-    if (adc1_handle) {
+    if (adc1_handle)
+    {
         adc_oneshot_del_unit(adc1_handle);
     }
 }
