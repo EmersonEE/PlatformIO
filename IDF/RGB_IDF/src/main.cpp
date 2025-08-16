@@ -24,15 +24,29 @@ void app_main()
             /* code */
 
             ledRGB.seleColor(RGB::BLUE);
-            vTaskDelay(pdMS_TO_TICKS(100));
+            vTaskDelay(pdMS_TO_TICKS(250));
             ledRGB.seleColor(RGB::GREEN);
-            vTaskDelay(pdMS_TO_TICKS(100));
+            vTaskDelay(pdMS_TO_TICKS(250));
             ledRGB.seleColor(RGB::RED);
-            vTaskDelay(pdMS_TO_TICKS(100));
+            vTaskDelay(pdMS_TO_TICKS(250));
             ledRGB.seleColor(RGB::VIOLET);
-            vTaskDelay(pdMS_TO_TICKS(5000));
+            vTaskDelay(pdMS_TO_TICKS(250));
+            ledRGB.seleColor(RGB::PINK);
+            vTaskDelay(pdMS_TO_TICKS(250));
+            ledRGB.seleColor(RGB::ORANGE);
+            vTaskDelay(pdMS_TO_TICKS(250));
+            // vTaskDelay(pdMS_TO_TICKS(5000));
             ledRGB.ledOff();
             vTaskDelay(pdMS_TO_TICKS(200));
         }
     }
 }
+
+// RED = 0,
+// GREEN,
+// BLUE,
+// PINK,
+// VIOLET,
+// ORANGE,
+// YELLOW,
+// GRIS
