@@ -10,7 +10,7 @@
 #define NUM_PIXELS 60
 #define BOTON_T1 A0
 #define BOTON_T2 A1
-
+#define TIME 500
 SemaphoreHandle_t xSerialSemaphore;
 
 void TaskBoton1(void *pvParameters);
@@ -63,7 +63,7 @@ void TaskBoton1(void *pvParameters __attribute__((unused)))
   while (true)
   {
 
-    botonT1.onStrip(0, 255, 0, 500);
+    botonT1.onStrip(0, 255, 0, TIME);
   }
   vTaskDelay(pdMS_TO_TICKS(10));
 }
@@ -73,7 +73,7 @@ void TaskBoton2(void *pvParameters __attribute__((unused)))
   while (true)
   {
 
-    botonT2.onStrip(0, 255, 0, 500);
+    botonT2.onStrip(0, 255, 0, TIME);
   }
   vTaskDelay(pdMS_TO_TICKS(10));
 }
