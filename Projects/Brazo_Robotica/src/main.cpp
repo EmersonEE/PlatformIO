@@ -4,6 +4,7 @@
 #include "data.h"
 #include <MQTT.h>
 #include "NEMA17.h"
+#include "Secuencias.h"
 MQTTClient clienteMQTT;
 WiFiMulti wifiMulti;
 WiFiClient net;
@@ -11,7 +12,7 @@ WiFiClient net;
 unsigned long tiempoAnterior = 0;
 unsigned long ultimoReintento = 0;
 const unsigned long intervaloReintento = 5000; // 5 segundos
-
+Secuencias secu;
 uint8_t EN_PIN = 16;
 uint8_t DIR_PIN = 2;
 uint8_t STEP_PIN = 4;
@@ -110,6 +111,8 @@ void MensajeMQTT(String topic, String payload)
   else if (topic = "ESP/Secuencias")
   {
     Serial.println(payload);
+    int secuenciaSel = payload.toInt();
+    secu.setSecuencia(secuenciaSel);
   }
   else
   {
