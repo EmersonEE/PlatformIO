@@ -20,7 +20,7 @@ void loop()
   if (botones.readButtonB1())
   {
     Serial.println("Boton 1 Presionado");
-    conteo = conteo +1;
+    conteo = conteo + 1;
     Leds.OnLed(LED2);
     Leds.OffLed(LED3);
     Serial.println(conteo);

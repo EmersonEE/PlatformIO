@@ -13,7 +13,7 @@ void app_main()
     // Configurando el timer
     ledc_timer_config_t ledc_timer = {
         .speed_mode = LEDC_LOW_SPEED_MODE,
-        .duty_resolution = LEDC_TIMER_13_BIT,
+        .duty_resolution = LEDC_TIMER_12_BIT,
         .timer_num = LEDC_TIMER_0,
         .freq_hz = 5000,
         .clk_cfg = LEDC_AUTO_CLK};
@@ -26,11 +26,13 @@ void app_main()
     ESP_LOGI(TAG, "Timer LEDC configurado exitosamente");
 
     ledc_channel_config_t ledc_channel = {
-        .gpio_num = GPIO_NUM_27,
+        .gpio_num = GPIO_NUM_26,
         .speed_mode = LEDC_LOW_SPEED_MODE,
         .channel = LEDC_CHANNEL_0,
         .timer_sel = LEDC_TIMER_0,
-        .duty = 0};
+        .duty = 0,
+        .hpoint =0
+    };
     error = ledc_channel_config(&ledc_channel);
     if (error != ESP_OK)
     {
@@ -49,6 +51,7 @@ void app_main()
         {
             delta = -delta;
         }
+        printf("Valor del Duty: %d\n", duty);
         vTaskDelay(pdMS_TO_TICKS(20));
     }
 }

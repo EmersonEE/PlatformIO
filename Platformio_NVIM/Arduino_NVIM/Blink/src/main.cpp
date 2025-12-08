@@ -1,19 +1,29 @@
-#include "led.h"
-#include "pins_arduino.h"
+#include "esp32-hal.h"
 #include <Arduino.h>
-
+#include <LED.h>
+#define LED1 2
+#define LED2 25
+#define LED3 26
+#define LED4 27
+LEDS leds(LED1, LED2, LED3, LED4);
+LEDS led22(LED1, LED2, LED3, LED4);
 void setup() {
-
-  pinMode(LED_BUILTIN, OUTPUT);
-  digitalWrite(LED_BUILTIN, LOW);
+  leds.init();
+  Serial.begin(115200);
 }
 
 void loop() {
 
-  digitalWrite(LED_BUILTIN, 1);
-  delay(500);
-  digitalWrite(LED_BUILTIN, 0);
-  delay(500);
-  while (1) {
+  for (int i = 0; i < 10; i++) {
+    leds.OnAll();
+    delay(500);
+    leds.OffAll();
+    delay(600);
+  }
+  if (int i = 0) {
+    leds.SecuenciaCinco();
+    delay(500);
+    leds.SecuenciaCuatro();
+    delay(400);
   }
 }
