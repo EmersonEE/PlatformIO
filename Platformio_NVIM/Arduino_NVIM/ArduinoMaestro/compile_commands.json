@@ -1,0 +1,350 @@
+[
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/CDC.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/CDC.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/CDC.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/CDC.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/HardwareSerial.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/HardwareSerial.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/HardwareSerial0.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial0.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial0.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/HardwareSerial0.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/HardwareSerial1.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial1.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial1.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/HardwareSerial1.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/HardwareSerial2.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial2.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial2.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/HardwareSerial2.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/HardwareSerial3.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial3.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/HardwareSerial3.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/HardwareSerial3.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/IPAddress.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/IPAddress.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/IPAddress.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/IPAddress.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/PluggableUSB.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/PluggableUSB.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/PluggableUSB.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/PluggableUSB.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/Print.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/Print.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/Print.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/Print.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/Stream.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/Stream.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/Stream.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/Stream.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/Tone.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/Tone.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/Tone.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/Tone.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/USBCore.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/USBCore.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/USBCore.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/USBCore.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/uno/FrameworkArduino/WInterrupts.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/WInterrupts.c",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/WInterrupts.c",
+        "output": ".pio/build/uno/FrameworkArduino/WInterrupts.c.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/WMath.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/WMath.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/WMath.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/WMath.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/WString.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/WString.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/WString.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/WString.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/abi.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/abi.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/abi.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/abi.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/uno/FrameworkArduino/hooks.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/hooks.c",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/hooks.c",
+        "output": ".pio/build/uno/FrameworkArduino/hooks.c.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/main.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/main.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/main.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/main.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/FrameworkArduino/new.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/new.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/new.cpp",
+        "output": ".pio/build/uno/FrameworkArduino/new.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/uno/FrameworkArduino/wiring.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring.c",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring.c",
+        "output": ".pio/build/uno/FrameworkArduino/wiring.c.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/uno/FrameworkArduino/wiring_analog.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_analog.c",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_analog.c",
+        "output": ".pio/build/uno/FrameworkArduino/wiring_analog.c.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/uno/FrameworkArduino/wiring_digital.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_digital.c",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_digital.c",
+        "output": ".pio/build/uno/FrameworkArduino/wiring_digital.c.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -mmcu=atmega328p -x assembler-with-cpp -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard -c -o .pio/build/uno/FrameworkArduino/wiring_pulse.S.o /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_pulse.S",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_pulse.S",
+        "output": ".pio/build/uno/FrameworkArduino/wiring_pulse.S.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/uno/FrameworkArduino/wiring_pulse.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_pulse.c",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_pulse.c",
+        "output": ".pio/build/uno/FrameworkArduino/wiring_pulse.c.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/uno/FrameworkArduino/wiring_shift.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_shift.c",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino/wiring_shift.c",
+        "output": ".pio/build/uno/FrameworkArduino/wiring_shift.c.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib9a6/SPI/SPI.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard /home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src/SPI.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src/SPI.cpp",
+        "output": ".pio/build/uno/lib9a6/SPI/SPI.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/animations/NeoPixelAnimator.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/animations/NeoPixelAnimator.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/animations/NeoPixelAnimator.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/animations/NeoPixelAnimator.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/HsbColor.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/HsbColor.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/HsbColor.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/HsbColor.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/HslColor.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/HslColor.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/HslColor.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/HslColor.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/HtmlColor.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/HtmlColor.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/HtmlColor.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/HtmlColor.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/HtmlColorNameStrings.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/HtmlColorNameStrings.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/HtmlColorNameStrings.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/HtmlColorNameStrings.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/HtmlColorNames.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/HtmlColorNames.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/HtmlColorNames.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/HtmlColorNames.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/HtmlColorShortNames.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/HtmlColorShortNames.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/HtmlColorShortNames.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/HtmlColorShortNames.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/NeoGammaDynamicTableMethod.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/NeoGammaDynamicTableMethod.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/NeoGammaDynamicTableMethod.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/NeoGammaDynamicTableMethod.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/NeoGammaTableMethod.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/NeoGammaTableMethod.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/NeoGammaTableMethod.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/NeoGammaTableMethod.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/Rgb48Color.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/Rgb48Color.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/Rgb48Color.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/Rgb48Color.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/RgbColor.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/RgbColor.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/RgbColor.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/RgbColor.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/RgbColorBase.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/RgbColorBase.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/RgbColorBase.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/RgbColorBase.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/Rgbw64Color.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/Rgbw64Color.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/Rgbw64Color.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/Rgbw64Color.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/RgbwColor.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/RgbwColor.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/RgbwColor.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/RgbwColor.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/Rgbww80Color.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/Rgbww80Color.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/Rgbww80Color.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/Rgbww80Color.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/RgbwwColor.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/RgbwwColor.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/RgbwwColor.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/RgbwwColor.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/RgbwwwColor.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/RgbwwwColor.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/RgbwwwColor.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/RgbwwwColor.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/colors/SegmentDigit.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/colors/SegmentDigit.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/colors/SegmentDigit.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/colors/SegmentDigit.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/uno/lib600/NeoPixelBus/internal/methods/Esp32_i2s.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/methods/Esp32_i2s.c",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/methods/Esp32_i2s.c",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/methods/Esp32_i2s.c.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/uno/lib600/NeoPixelBus/internal/methods/FractionClk.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/methods/FractionClk.c",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/methods/FractionClk.c",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/methods/FractionClk.c.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/methods/NeoEsp32RmtMethod.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/methods/NeoEsp32RmtMethod.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/methods/NeoEsp32RmtMethod.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/methods/NeoEsp32RmtMethod.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/methods/NeoEsp8266I2sMethodCore.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/methods/NeoEsp8266I2sMethodCore.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/methods/NeoEsp8266I2sMethodCore.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/methods/NeoEsp8266I2sMethodCore.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/methods/NeoEsp8266UartMethod.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/methods/NeoEsp8266UartMethod.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/methods/NeoEsp8266UartMethod.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/methods/NeoEsp8266UartMethod.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/methods/NeoEspBitBangMethod.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/methods/NeoEspBitBangMethod.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/methods/NeoEspBitBangMethod.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/methods/NeoEspBitBangMethod.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-gcc -o .pio/build/uno/lib600/NeoPixelBus/internal/methods/NeoPixelAvr.c.o -c -std=gnu11 -fno-fat-lto-objects -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/methods/NeoPixelAvr.c",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/methods/NeoPixelAvr.c",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/methods/NeoPixelAvr.c.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/lib600/NeoPixelBus/internal/methods/Rp2040/NeoRp2040PioMonoProgram.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/NeoPixelBus/src/internal/methods/Rp2040/NeoRp2040PioMonoProgram.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/NeoPixelBus/src/internal/methods/Rp2040/NeoRp2040PioMonoProgram.cpp",
+        "output": ".pio/build/uno/lib600/NeoPixelBus/internal/methods/Rp2040/NeoRp2040PioMonoProgram.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/libe59/EasyButton/EasyButton.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/EasyButton/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/EasyButton/src/EasyButton.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/EasyButton/src/EasyButton.cpp",
+        "output": ".pio/build/uno/libe59/EasyButton/EasyButton.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/libe59/EasyButton/EasyButtonBase.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/EasyButton/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/EasyButton/src/EasyButtonBase.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/EasyButton/src/EasyButtonBase.cpp",
+        "output": ".pio/build/uno/libe59/EasyButton/EasyButtonBase.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/libe59/EasyButton/EasyButtonTouch.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/EasyButton/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/EasyButton/src/EasyButtonTouch.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/EasyButton/src/EasyButtonTouch.cpp",
+        "output": ".pio/build/uno/libe59/EasyButton/EasyButtonTouch.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/libe59/EasyButton/EasyButtonVirtual.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/EasyButton/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/EasyButton/src/EasyButtonVirtual.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/EasyButton/src/EasyButtonVirtual.cpp",
+        "output": ".pio/build/uno/libe59/EasyButton/EasyButtonVirtual.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/libe59/EasyButton/Sequence.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -I.pio/libdeps/uno/EasyButton/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard .pio/libdeps/uno/EasyButton/src/Sequence.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": ".pio/libdeps/uno/EasyButton/src/Sequence.cpp",
+        "output": ".pio/build/uno/libe59/EasyButton/Sequence.cpp.o"
+    },
+    {
+        "command": "/home/emerson/.platformio/packages/toolchain-atmelavr/bin/avr-g++ -o .pio/build/uno/src/main.cpp.o -c -fno-exceptions -fno-threadsafe-statics -fpermissive -std=gnu++11 -mmcu=atmega328p -Os -Wall -ffunction-sections -fdata-sections -flto -DPLATFORMIO=60118 -DARDUINO_AVR_UNO -DF_CPU=16000000L -DARDUINO_ARCH_AVR -DARDUINO=10808 -Iinclude -Isrc -I.pio/libdeps/uno/EasyButton/src -I.pio/libdeps/uno/NeoPixelBus/src -I/home/emerson/.platformio/packages/framework-arduino-avr/libraries/SPI/src -I/home/emerson/.platformio/packages/framework-arduino-avr/cores/arduino -I/home/emerson/.platformio/packages/framework-arduino-avr/variants/standard src/main.cpp",
+        "directory": "/home/misArchivos/Documentos/PlatformIO/Platformio_NVIM/Arduino_NVIM/ArduinoMaestro",
+        "file": "src/main.cpp",
+        "output": ".pio/build/uno/src/main.cpp.o"
+    }
+]

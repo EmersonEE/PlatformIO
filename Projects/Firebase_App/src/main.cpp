@@ -30,6 +30,14 @@ String key, value;
 
 RTC_DS3231 rtc;
 
+uint8_t pinPWD = 23;
+uint8_t pinAgua = 18;
+uint8_t pinComida = 19;
+
+const int ledChannel = 0;
+const int frecuency = 5000;
+const int resolution = 8;
+
 void procesarComida()
 {
   if (foodEnProceso)
@@ -62,11 +70,11 @@ void ejecutarComida()
 
   if (millis() - foodInicio < duracion)
   {
-    digitalWrite(LED_BUILTIN, HIGH);
+    digitalWrite(pinComida, HIGH);
   }
   else
   {
-    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(pinComida, LOW);
     foodEnProceso = false;
     gramsPendiente = 0;
 
@@ -88,8 +96,8 @@ void procesarAgua()
   if (ml <= 0)
     return;
 
-  if (ml > 200)
-    ml = 200;
+  if (ml > 300)
+    ml = 300;
 
   accionEnProceso = true;
   accionInicio = millis();
@@ -105,15 +113,15 @@ void ejecutarAgua()
   if (!accionEnProceso)
     return;
 
-  unsigned long duracion = 150UL * mlPendiente;
+  unsigned long duracion = 15UL * mlPendiente;
 
   if (millis() - accionInicio < duracion)
   {
-    digitalWrite(LED_BUILTIN, HIGH);
+    digitalWrite(pinAgua, HIGH);
   }
   else
   {
-    digitalWrite(LED_BUILTIN, LOW);
+    digitalWrite(pinAgua, LOW);
     accionEnProceso = false;
     mlPendiente = 0;
     Serial.println("Agua completada");
@@ -130,7 +138,9 @@ void ejecutarAlarma(int grams)
   Serial.println(tiempo_ms);
 
   digitalWrite(LED_BUILTIN, HIGH);
+  digitalWrite(pinComida, HIGH);
   delay(tiempo_ms);
+  digitalWrite(pinComida, LOW);
   digitalWrite(LED_BUILTIN, LOW);
 }
 
@@ -183,7 +193,14 @@ void setup()
   delay(1000);
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, 0);
+  pinMode(pinAgua, OUTPUT);
+  pinMode(pinComida, OUTPUT);
+  // pinMode(pinPWD, OUTPUT);
+  // digitalWrite(pinPWD, 0);
 
+  ledcSetup(ledChannel, frecuency, resolution);
+  ledcAttachPin(pinPWD, ledChannel);
+  ledcWrite(ledChannel, 0);
   wificonfig();
   if (!rtc.begin())
   {
@@ -231,7 +248,7 @@ void loop()
   ejecutarComida();
   DateTime now = rtc.now();
 
-  if (millis() - sendDataPrevMillis < 2500 && sendDataPrevMillis != 0)
+  if (millis() - sendDataPrevMillis < 10000 && sendDataPrevMillis != 0)
     return;
 
   sendDataPrevMillis = millis();
@@ -342,6 +359,7 @@ void loop()
     {
       Serial.println("¡¡¡ ES HORA DE ACTIVAR LA ALARMA !!!");
       ejecutarAlarma(grams);
+      // ejecutarComida();
 
       long long nowMs = (long long)now.unixtime() * 1000LL;
       Firebase.RTDB.setInt(&fbdo, "/alarms/" + key + "/lastTriggered", nowMs);
@@ -357,5 +375,17 @@ void loop()
       Serial.println("Aún no es hora.");
     }
   }
+  for (int i = 0; i < 255; i++)
+  {
+    /* code */
+    ledcWrite(ledChannel, i);
+    delay(50);
+  }
+  for (int i = 255; i > 0; i--)
+  {
+    ledcWrite(ledChannel, i);4
+    delay(50);
+  }
+
   alarmsJson.iteratorEnd();
 }

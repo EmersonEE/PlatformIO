@@ -1,0 +1,5 @@
+## idf_component.yml  (en la raíz, mismo nivel que platformio.ini)
+
+dependencies:
+  tny-robotics/sh1106-esp-idf:
+    version: "~1.0.0"

@@ -20,7 +20,7 @@ void app_main() {
                                     .clk_cfg = LEDC_AUTO_CLK};
   ledc_timer_config(&ledc_timer);
 
-  ledc_channel_config_t ledc_channel = {.gpio_num = GPIO_NUM_26,
+  ledc_channel_config_t ledc_channel = {.gpio_num = GPIO_NUM_14,
                                         .speed_mode = LEDC_LOW_SPEED_MODE,
                                         .channel = LEDC_CHANNEL_1,
                                         .timer_sel = LEDC_TIMER_0,
