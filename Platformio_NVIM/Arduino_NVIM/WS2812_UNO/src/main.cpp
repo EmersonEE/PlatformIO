@@ -7,7 +7,6 @@
 #define NUM_LEDS 64
 
 CRGB leds[NUM_LEDS];
-
 void setup() { FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS); }
 
 void loop() {
