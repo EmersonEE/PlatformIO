@@ -3,210 +3,157 @@
 #include "wificonf.h"
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
-#include <MAX30105.h>
-#include <Wire.h>
-#include <cstdlib>
-#include <execution>
-#include <heartRate.h>
 
 Driver ledOk(LED_BUILTIN);
 WIFI_CONF wf;
-MAX30105 particleSensor;
+
+#define SENSOR_PIN A0
+const long fingerThreshold = 150;
+const long signalMax = 1000;
 
 const byte RATE_SIZE = 4;
 byte rates[RATE_SIZE];
 byte rateSpot = 0;
 long lastBeat = 0;
+bool peakDetected = false;
 
-float irFiltered = 0;
-const float alpha = 0.9;
+float signalFiltered = 0;
+const float alphaSignal = 0.9;
 
-float beatsPerMinute;
-int beatAvg;
+float beatsPerMinute = 0;
+int beatAvg = 0;
+float lastValidBPM = 0;
 
-const char *host = "192.168.1.136";
+const char *host = "192.168.1.217";
 const int port = 80;
-
 const unsigned long interval = 5000;
-const long fingerThreshold = 50000;
-
 unsigned long previousMillis = 0;
-
-struct SensorData {
-  long irValue;
-  float bpm;
-  int avgBpm;
-};
-
-float procesarBPM(float bpmRaw, long irValue) {
-
-  if (irValue < fingerThreshold) {
-    return -1; // inválido
-  }
-
-  float bpm = bpmRaw;
-
-  if (bpm < 50 || bpm > 120) {
-    return -1;
-  }
-
-  static float bpmPrev = 70;
-
-  if (abs(bpm - bpmPrev) > 15) {
-    bpm = bpmPrev;
-  }
-
-#define N 5
-  static float buffer[N] = {70, 70, 70, 70, 70};
-  static int idx = 0;
-
-  buffer[idx++] = bpm;
-  idx %= N;
-
-  float suma = 0;
-  for (int i = 0; i < N; i++) {
-    suma += buffer[i];
-  }
-
-  bpm = suma / N;
-
-  static float bpmFiltrado = 70;
-  float alpha = 0.2;
-
-  bpmFiltrado = alpha * bpm + (1 - alpha) * bpmFiltrado;
-
-  bpmPrev = bpmFiltrado;
-
-  return bpmFiltrado;
-}
-
-SensorData leerSensor() {
-
-  SensorData data;
-
-  long irValue = particleSensor.getIR();
-
-  irFiltered = alpha * irFiltered + (1 - alpha) * irValue;
-
-  if (checkForBeat(irFiltered)) {
-
-    long delta = millis() - lastBeat;
-    lastBeat = millis();
-
-    beatsPerMinute = 60 / (delta / 1000.0);
-
-    if (beatsPerMinute < 220 && beatsPerMinute > 30) {
-
-      rates[rateSpot++] = (byte)beatsPerMinute;
-      rateSpot %= RATE_SIZE;
-
-      beatAvg = 0;
-
-      for (byte x = 0; x < RATE_SIZE; x++)
-        beatAvg += rates[x];
-
-      beatAvg /= RATE_SIZE;
-    }
-  }
-
-  data.irValue = irFiltered;
-  data.bpm = beatsPerMinute;
-  data.avgBpm = beatAvg;
-
-  return data;
-}
-
-void maxInit() {
-
-  if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) {
-    Serial.println("MAX30102 no encontrado");
-    while (1)
-      ;
-  }
-
-  Serial.println("Colocar dedo en el sensor");
-
-  byte ledBrightness = 60;
-  byte sampleAverage = 4;
-  byte ledMode = 2;
-  int sampleRate = 100;
-  int pulseWidth = 411;
-  int adcRange = 4096;
-
-  particleSensor.setup(ledBrightness, sampleAverage, ledMode, sampleRate,
-                       pulseWidth, adcRange);
-
-  particleSensor.setPulseAmplitudeRed(0x1F);
-  particleSensor.setPulseAmplitudeGreen(0);
-}
-
-void setup() {
-  Serial.begin(115200);
-  randomSeed(micros());
-
-  wf.confinit(false);
-  wf.showIP();
-
-  Serial.println("ESP8266 iniciado");
-  maxInit();
-}
-
+unsigned long lastSampleTime = 0;
 void enviarDatos(float bpm) {
-
   WiFiClient client;
 
+  // 🔌 Conectar al servidor
   if (!client.connect(host, port)) {
-    Serial.println("Error de conexión");
+    Serial.println("❌ Error conexión TCP al servidor");
     return;
   }
 
-  char url[120];
+  // 📝 Construir la URL apuntando al archivo correcto
+  // Nota: Cambiamos 'api/registros.php' por 'api/recibir_datos_esp32.php'
+  char url[150];
+  snprintf(url, sizeof(url),
+           "/heart_rate/api/recibir_datos_esp32.php?id_paciente=1&bpm=%.0f",
+           bpm);
 
-  snprintf(url, sizeof(url), "/heart_rate/index.php?bpm=%.2f", bpm);
+  Serial.printf("📤 Enviando petición a: %s\n", url);
 
-  Serial.println(url);
+  // 🚀 Enviar petición GET
+  client.printf("GET %s HTTP/1.1\r\nHost: %s\r\nConnection: close\r\n\r\n", url,
+                host);
 
-  client.printf("GET %s HTTP/1.1\r\n"
-                "Host: %s\r\n"
-                "Connection: close\r\n\r\n",
-                url, host);
-
+  //  Esperar respuesta
   unsigned long timeout = millis();
-
   while (!client.available()) {
-    if (millis() - timeout > 5000) {
-      Serial.println("Timeout");
+    if (millis() - timeout > 3000) {
+      Serial.println(" Timeout esperando respuesta del servidor");
       client.stop();
       return;
     }
   }
 
-  while (client.available()) {
-    Serial.write(client.read());
+  // 📖 Leer respuesta para verificar si se guardó
+  // Buscamos la palabra "Guardado" en la respuesta
+  String respuesta = client.readString();
+  if (respuesta.indexOf("Guardado") != -1) {
+    Serial.println("✅ ¡Éxito! Datos guardados en el servidor.");
+    // Opcional: Parpadear LED verde si tienes uno
+  } else {
+    Serial.println("⚠️ Respuesta del servidor (posible error):");
+    Serial.println(
+        respuesta.substring(0, 100)); // Imprime los primeros 100 caracteres
   }
 
   client.stop();
 }
+bool detectarPulso(int signalValue) {
+  static float baseline = 500;
+  baseline = baseline * 0.995 + signalValue * 0.005; // Línea base adaptativa
+  int deviation = signalValue - baseline;
 
-SensorData sensor;
+  const int peakThreshold = 25;
+
+  if (deviation > peakThreshold && !peakDetected &&
+      (millis() - lastBeat > 300)) {
+    peakDetected = true;
+    return true;
+  }
+  if (deviation < peakThreshold * 0.5)
+    peakDetected = false;
+  return false;
+}
+
+void loopSensor() {
+  int raw = analogRead(SENSOR_PIN);
+  signalFiltered = alphaSignal * signalFiltered + (1.0 - alphaSignal) * raw;
+
+  if (signalFiltered > fingerThreshold && signalFiltered < signalMax) {
+    if (detectarPulso(signalFiltered)) {
+      long delta = millis() - lastBeat;
+      lastBeat = millis();
+
+      if (delta > 300 && delta < 2000) { // 30-200 BPM
+        beatsPerMinute = 60000.0 / (float)delta;
+
+        rates[rateSpot++] = constrain((byte)beatsPerMinute, 30, 200);
+        rateSpot %= RATE_SIZE;
+
+        beatAvg = 0;
+        for (byte i = 0; i < RATE_SIZE; i++)
+          beatAvg += rates[i];
+        beatAvg /= RATE_SIZE;
+
+        lastValidBPM = (beatAvg > 0) ? beatAvg : beatsPerMinute;
+        Serial.printf("💓 Latido: %.0f BPM (Delta: %lums)\n", lastValidBPM,
+                      delta);
+      }
+    }
+  } else {
+    beatsPerMinute = 0;
+    beatAvg = 0;
+  }
+}
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(SENSOR_PIN, INPUT);
+
+  // Estabilizar ADC
+  for (int i = 0; i < 20; i++) {
+    analogRead(SENSOR_PIN);
+    delay(5);
+  }
+  signalFiltered = analogRead(SENSOR_PIN);
+
+  wf.confinit(false);
+  wf.showIP();
+  Serial.println("✅ ESP8266 listo. Coloca el dedo.");
+}
 
 void loop() {
-
-  sensor = leerSensor();
-
-  float bpmFiltrado = procesarBPM(sensor.avgBpm, sensor.irValue);
-
-  if (bpmFiltrado < 0) {
-    return;
+  // Muestreo a ~100Hz
+  if (millis() - lastSampleTime >= 10) {
+    lastSampleTime = millis();
+    loopSensor();
   }
 
   if (millis() - previousMillis >= interval) {
-
     previousMillis = millis();
 
-    Serial.print("BPM Filtrado: ");
-    Serial.println(bpmFiltrado);
-
-    enviarDatos(bpmFiltrado);
+    if (lastValidBPM >= 30 && lastValidBPM <= 200) {
+      enviarDatos(lastValidBPM);
+    } else {
+      Serial.println("⚠️ Sin BPM válido para enviar");
+    }
   }
+  yield();
 }
