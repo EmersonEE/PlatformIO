@@ -1,0 +1,13 @@
+#include "Arduino.h"
+int SENSOR; // variable para almacenar valor leido de A0
+
+void setup() {
+  Serial.begin(9600); // inicializa comunicacion serie a 9600 bps
+  // entradas analógicas no requieren inicialización
+}
+
+void loop() {
+  SENSOR = analogRead(A5); // lee y almacena valor leido de entrada analogica A0
+  Serial.println(SENSOR);  // imprime en monitor serial el valor leido
+  delay(500);              // demora de medio segundo
+}
