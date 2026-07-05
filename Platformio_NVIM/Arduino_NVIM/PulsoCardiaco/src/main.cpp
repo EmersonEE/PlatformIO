@@ -10,7 +10,6 @@ WIFI_CONF wf;
 #define SENSOR_PIN A0
 const long fingerThreshold = 150;
 const long signalMax = 1000;
-
 const byte RATE_SIZE = 4;
 byte rates[RATE_SIZE];
 byte rateSpot = 0;
