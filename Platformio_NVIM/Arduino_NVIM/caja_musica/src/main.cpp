@@ -8,7 +8,6 @@
 SoftwareSerial softSerial(10, 11);
 DFRobotDFPlayerMini reproductor;
 
-bool estadoAnterior = LOW;
 bool reproduciendo = false;
 
 const byte leds = 12;
@@ -17,6 +16,19 @@ unsigned long tiempoAnterior = 0;
 unsigned long tiempoInicio = 0;
 
 byte estadoAnimacion = 0;
+
+// Debounce pulsador principal
+bool estadoPulsador = LOW;
+bool ultimaLectura = HIGH;
+unsigned long ultimoTiempoDebounce = 0;
+const unsigned long debounceDelay = 30;
+
+// Anuncio no bloqueante
+bool estadoAnuncio = HIGH;
+bool ultimaLecturaAnuncio = HIGH;
+unsigned long ultimoTiempoDebounceAnuncio = 0;
+unsigned long ultimoTiempoAnuncio = 0;
+const unsigned long cooldownAnuncio = 500;
 
 void animacionCorazon() {
 
@@ -126,8 +138,13 @@ void setup() {
   digitalWrite(leds, LOW);
 
   if (!reproductor.begin(softSerial, true, false)) {
-    while (true)
-      ;
+    pinMode(leds, OUTPUT);
+    while (true) {
+      digitalWrite(leds, HIGH);
+      delay(100);
+      digitalWrite(leds, LOW);
+      delay(100);
+    }
   }
 
   delay(1000);
@@ -139,38 +156,54 @@ void setup() {
 }
 
 void loop() {
+  unsigned long ahora = millis();
 
-  bool estadoActual = digitalRead(PULSADOR);
+  // --- Pulsador principal con debounce ---
+  bool lectura = digitalRead(PULSADOR);
 
-  if (estadoActual == HIGH && estadoAnterior == LOW) {
-
-    reproductor.start();
-    reproduciendo = true;
-
-    tiempoInicio = millis();
-    estadoAnimacion = 0;
-
-    Serial.println("Reproduciendo");
+  if (lectura != ultimaLectura) {
+    ultimoTiempoDebounce = ahora;
+    ultimaLectura = lectura;
   }
 
-  if (estadoActual == LOW && estadoAnterior == HIGH) {
+  if (ahora - ultimoTiempoDebounce >= debounceDelay) {
+    if (lectura != estadoPulsador) {
+      estadoPulsador = lectura;
 
-    reproductor.pause();
-    reproduciendo = false;
-
-    digitalWrite(leds, LOW);
-
-    Serial.println("Pausado");
+      if (lectura == HIGH) {
+        reproductor.start();
+        reproduciendo = true;
+        tiempoInicio = ahora;
+        estadoAnimacion = 0;
+        Serial.println("Reproduciendo");
+      } else {
+        reproductor.pause();
+        reproduciendo = false;
+        digitalWrite(leds, LOW);
+        Serial.println("Pausado");
+      }
+    }
   }
-
-  estadoAnterior = estadoActual;
 
   if (reproduciendo) {
     animacionCorazon();
   }
 
-  if (digitalRead(PULSADOR_ANUNCIO) == LOW) {
-    reproductor.advertise(1);
-    delay(500);
+  // --- Pulsador de anuncio con debounce y cooldown no bloqueante ---
+  bool lecturaAnuncio = digitalRead(PULSADOR_ANUNCIO);
+
+  if (lecturaAnuncio != ultimaLecturaAnuncio) {
+    ultimoTiempoDebounceAnuncio = ahora;
+    ultimaLecturaAnuncio = lecturaAnuncio;
+  }
+
+  if (ahora - ultimoTiempoDebounceAnuncio >= debounceDelay) {
+    if (lecturaAnuncio == LOW && estadoAnuncio == HIGH &&
+        ahora - ultimoTiempoAnuncio >= cooldownAnuncio) {
+      reproductor.advertise(1);
+      ultimoTiempoAnuncio = ahora;
+      Serial.println("Anuncio");
+    }
+    estadoAnuncio = lecturaAnuncio;
   }
 }
