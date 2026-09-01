@@ -3,7 +3,7 @@
  * Solo muestra UN color solido en toda la tira, tomado de keyboard.rgb.
  *
  * Endpoint:
- *   GET /color?hex=RRGGBB   -> aplica ese color solido a toda la tira
+ *   https://github.com/anurag3301/nvim-platformio.luaGET /color?hex=RRGGBB   -> aplica ese color solido a toda la tira
  *   GET /status             -> color actual en JSON
  */
 
