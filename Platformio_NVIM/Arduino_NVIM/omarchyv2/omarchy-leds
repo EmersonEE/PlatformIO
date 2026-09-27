@@ -1,0 +1,443 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# omarchy-leds: Utilidad CLI y motor de sincronización de tiras WS2812B con Omarchy
+# ==============================================================================
+
+set -o pipefail
+
+MDNS_HOST="omarchy-leds.local"
+FALLBACK_IP="192.168.1.228"
+CONFIG_FILE="$HOME/.config/omarchy-esp32-leds/theme-colors.conf"
+CACHE_DIR="$HOME/.cache/omarchy-leds"
+NIGHTLIGHT_FLAG="$CACHE_DIR/nightlight_active"
+
+mkdir -p "$CACHE_DIR"
+
+# Detección de ruta de estado de Omarchy (XDG State)
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/current"
+if [[ ! -d "$STATE_DIR" && -d "$HOME/.config/omarchy/current" ]]; then
+  STATE_DIR="$HOME/.config/omarchy/current"
+fi
+
+THEME_NAME_FILE="$STATE_DIR/theme.name"
+KEYBOARD_RGB_FILE="$STATE_DIR/theme/keyboard.rgb"
+COLORS_TOML_FILE="$STATE_DIR/theme/colors.toml"
+
+# Función base para enviar petición HTTP con fallback mDNS -> IP
+send_http() {
+  local params="$1"
+  local success=0
+  local used_host=""
+
+  # 1. Intentar con mDNS
+  if curl -s -f --connect-timeout 1.5 --max-time 2.5 "http://${MDNS_HOST}/color?${params}" >/dev/null 2>&1; then
+    success=1
+    used_host="${MDNS_HOST}"
+  else
+    # 2. Fallback a IP fija
+    for attempt in 1 2; do
+      if curl -s -f --connect-timeout 1.5 --max-time 2.5 "http://${FALLBACK_IP}/color?${params}" >/dev/null 2>&1; then
+        success=1
+        used_host="${FALLBACK_IP}"
+        break
+      fi
+      sleep 0.3
+    done
+  fi
+
+  if (( success == 1 )); then
+    echo "$used_host"
+    return 0
+  else
+    return 1
+  fi
+}
+
+# Obtener nombre del tema actual
+get_current_theme() {
+  if [[ -f "$THEME_NAME_FILE" ]]; then
+    tr -d '\n\r ' < "$THEME_NAME_FILE"
+  fi
+}
+
+# Verificar si el modo noche (hyprsunset) está activo
+is_nightlight_active() {
+  # Flag manual local
+  [[ -f "$NIGHTLIGHT_FLAG" ]] && return 0
+
+  # Consulta a omarchy-toggle-nightlight
+  if command -v omarchy-toggle-nightlight >/dev/null 2>&1; then
+    local status
+    status=$(omarchy-toggle-nightlight --status 2>/dev/null)
+    if [[ "$status" =~ \"enabled\":true ]]; then
+      return 0
+    fi
+  fi
+
+  # Consulta a hyprctl hyprsunset si responde
+  local temp
+  temp=$(hyprctl hyprsunset temperature 2>/dev/null | grep -oE '^[0-9]+' | head -n1)
+  if [[ -n "$temp" && "$temp" =~ ^[0-9]+$ ]] && (( temp < 6000 )); then
+    return 0
+  fi
+
+  return 1
+}
+
+# Sincronización del tema actual
+cmd_sync() {
+  local theme_input="$1"
+  local theme_name="${theme_input:-$(get_current_theme)}"
+  local color=""
+  local req_bri=""
+  local color_source=""
+
+  # 1. Fallback Nivel 1: Configuración manual
+  if [[ -n "$theme_name" && -f "$CONFIG_FILE" ]]; then
+    local raw_entry
+    raw_entry=$(grep -E "^[[:space:]]*${theme_name}[[:space:]]*=" "$CONFIG_FILE" | head -n1 | cut -d'=' -f2 | tr -d ' \r\n')
+    if [[ -n "$raw_entry" ]]; then
+      if [[ "$raw_entry" == *","* ]]; then
+        color=$(echo "$raw_entry" | cut -d',' -f1 | tr -d '#')
+        req_bri=$(echo "$raw_entry" | cut -d',' -f2)
+      else
+        color=$(echo "$raw_entry" | tr -d '#')
+      fi
+      [[ -n "$color" ]] && color_source="theme-colors.conf"
+    fi
+  fi
+
+  # 2. Fallback Nivel 2: keyboard.rgb
+  if [[ -z "$color" && -f "$KEYBOARD_RGB_FILE" ]]; then
+    color=$(tr -d '#\n\r ' < "$KEYBOARD_RGB_FILE")
+    [[ -n "$color" ]] && color_source="keyboard.rgb"
+  fi
+
+  # 3. Fallback Nivel 3: colors.toml (accent)
+  if [[ -z "$color" && -f "$COLORS_TOML_FILE" ]]; then
+    color=$(grep -E '^[[:space:]]*accent[[:space:]]*=' "$COLORS_TOML_FILE" | head -n1 | sed -E 's/.*=[[:space:]]*["'\'']?#?([0-9a-fA-F]{6}).*/\1/')
+    [[ -n "$color" ]] && color_source="colors.toml (accent)"
+  fi
+
+  if [[ ! "$color" =~ ^[0-9a-fA-F]{6}$ ]]; then
+    if [[ -t 1 ]]; then
+      echo "Error: No se pudo determinar un color válido para el tema '${theme_name}'." >&2
+    fi
+    if [[ "${OMARCHY_LEDS_DEBUG:-0}" == "1" ]]; then
+      notify-send -u normal "ESP32 LEDs [Debug]" "No se encontró color válido para el tema '${theme_name}'" 2>/dev/null
+    fi
+    return 1
+  fi
+
+  # Ajuste si el modo noche (hyprsunset) está activo
+  if is_nightlight_active; then
+    # Atenuar brillo para no encandilar en la noche (a un 40% del configurado o máx 80)
+    local base_bri="${req_bri:-200}"
+    req_bri=$(( base_bri * 40 / 100 ))
+    (( req_bri < 35 )) && req_bri=35
+    color_source="${color_source} [Modo Noche Atenuado]"
+  fi
+
+  # Construir parámetros
+  local query="hex=${color}"
+  if [[ "$req_bri" =~ ^[0-9]+$ && "$req_bri" -ge 0 && "$req_bri" -le 255 ]]; then
+    query="${query}&b=${req_bri}"
+  fi
+
+  # Enviar petición (asíncrono si no estamos en terminal interactiva para no retrasar Omarchy)
+  do_send() {
+    local host_used
+    if host_used=$(send_http "$query"); then
+      if [[ -t 1 ]]; then
+        local bri_str="por defecto"
+        [[ -n "$req_bri" ]] && bri_str="${req_bri}/255"
+        echo "✓ Sincronizado: #${color} (Brillo: ${bri_str}) | Tema: ${theme_name} | Origen: ${color_source} | Host: ${host_used}"
+      fi
+      if [[ "${OMARCHY_LEDS_DEBUG:-0}" == "1" ]]; then
+        local bri_dbg="${req_bri:-por defecto}"
+        notify-send -u low "ESP32 LEDs [Debug]" "Color #${color} (${bri_dbg}) aplicado.\nTema: ${theme_name}\nOrigen: ${color_source}\nHost: ${host_used}" 2>/dev/null
+      fi
+    else
+      if [[ -t 1 ]]; then
+        echo "✗ Error: No se pudo conectar con el ESP32 en ${MDNS_HOST} ni en ${FALLBACK_IP}" >&2
+      fi
+      notify-send -u normal "ESP32 LEDs" "Fallo de conexión tras varios reintentos.\nNo responde ${MDNS_HOST} ni ${FALLBACK_IP}" 2>/dev/null
+      return 1
+    fi
+  }
+
+  if [[ -t 1 ]]; then
+    do_send
+  else
+    do_send &
+  fi
+}
+
+# Guardar color personalizado para el tema actual en theme-colors.conf
+cmd_save() {
+  local hex_input="$1"
+  local bri_input="$2"
+
+  if [[ -z "$hex_input" ]]; then
+    echo "Uso: omarchy-leds save <hex> [brillo 0-255]"
+    echo "Ejemplo: omarchy-leds save 00ffff 180"
+    return 1
+  fi
+
+  local clean_hex="${hex_input#'#'}"
+  clean_hex=$(echo "$clean_hex" | tr '[:upper:]' '[:lower:]' | tr -d ' ')
+
+  if [[ ! "$clean_hex" =~ ^[0-9a-f]{6}$ ]]; then
+    echo "Error: '${hex_input}' no es un color hexadecimal válido (formato RRGGBB)." >&2
+    return 1
+  fi
+
+  if [[ -n "$bri_input" ]]; then
+    if [[ ! "$bri_input" =~ ^[0-9]+$ ]] || (( bri_input < 0 || bri_input > 255 )); then
+      echo "Error: El brillo debe ser un número entero entre 0 y 255." >&2
+      return 1
+    fi
+  fi
+
+  local current_theme
+  current_theme=$(get_current_theme)
+
+  if [[ -z "$current_theme" ]]; then
+    echo "Error: No se pudo determinar el tema activo de Omarchy en '${THEME_NAME_FILE}'." >&2
+    return 1
+  fi
+
+  # Formatear la línea
+  local new_entry="${current_theme}=${clean_hex}"
+  [[ -n "$bri_input" ]] && new_entry="${new_entry},${bri_input}"
+
+  # Asegurar que el archivo de configuración exista
+  mkdir -p "$(dirname "$CONFIG_FILE")"
+  touch "$CONFIG_FILE"
+
+  # Si el tema ya existe en el archivo, actualizar la línea in-place
+  if grep -q -E "^[[:space:]]*${current_theme}[[:space:]]*=" "$CONFIG_FILE"; then
+    sed -i -E "s/^[[:space:]]*${current_theme}[[:space:]]*=.*/${new_entry}/" "$CONFIG_FILE"
+  else
+    # Si no existe, agregar al final
+    echo "$new_entry" >> "$CONFIG_FILE"
+  fi
+
+  echo "✓ Guardado en theme-colors.conf: [${new_entry}]"
+  echo "Aplicando color a la tira LED..."
+  cmd_sync "$current_theme"
+}
+
+# Alerta de batería baja
+cmd_battery_low() {
+  local level="${1:-15}"
+  local host_used
+
+  # Parpadeo de advertencia en rojo suave (3 pulsos mediante crossfade)
+  do_battery_alert() {
+    # 3 pulsos suaves
+    for i in 1 2 3; do
+      send_http "hex=ff2222&b=200" >/dev/null 2>&1
+      sleep 0.7
+      send_http "hex=330505&b=50" >/dev/null 2>&1
+      sleep 0.7
+    done
+
+    # Si la batería es crítica (<= 10%), mantener en rojo suave
+    if (( level <= 10 )); then
+      send_http "hex=ff2222&b=130" >/dev/null 2>&1
+    else
+      # Si no es crítica, re-sincronizar el color del tema actual
+      cmd_sync
+    fi
+  }
+
+  if [[ -t 1 ]]; then
+    echo "Alerta de batería baja (${level}%): emitiendo advertencia en LEDs..."
+    do_battery_alert
+  else
+    do_battery_alert &
+  fi
+}
+
+# Control y sincronización de modo noche (hyprsunset)
+cmd_nightlight() {
+  local action="${1:-toggle}"
+
+  case "$action" in
+    on)
+      touch "$NIGHTLIGHT_FLAG"
+      if command -v omarchy-toggle-nightlight >/dev/null 2>&1; then
+        local st
+        st=$(omarchy-toggle-nightlight --status 2>/dev/null)
+        if [[ ! "$st" =~ \"enabled\":true ]]; then
+          omarchy-toggle-nightlight >/dev/null 2>&1 || true
+        fi
+      fi
+      echo "Modo noche ACTIVADO (LEDs atenuados y cálidos)."
+      cmd_sync
+      ;;
+    off)
+      rm -f "$NIGHTLIGHT_FLAG"
+      if command -v omarchy-toggle-nightlight >/dev/null 2>&1; then
+        local st
+        st=$(omarchy-toggle-nightlight --status 2>/dev/null)
+        if [[ "$st" =~ \"enabled\":true ]]; then
+          omarchy-toggle-nightlight >/dev/null 2>&1 || true
+        fi
+      fi
+      echo "Modo noche DESACTIVADO (Restaurando color del tema)."
+      cmd_sync
+      ;;
+    toggle)
+      if is_nightlight_active; then
+        cmd_nightlight off
+      else
+        cmd_nightlight on
+      fi
+      ;;
+    status)
+      if is_nightlight_active; then
+        echo "Modo noche: ACTIVO"
+      else
+        echo "Modo noche: INACTIVO"
+      fi
+      ;;
+    *)
+      echo "Uso: omarchy-leds nightlight [on|off|toggle|status]"
+      return 1
+      ;;
+  esac
+}
+
+# Comando set directo (para probar cualquier color/brillo)
+cmd_set() {
+  local hex_input="$1"
+  local bri_input="$2"
+
+  if [[ -z "$hex_input" ]]; then
+    echo "Uso: omarchy-leds set <hex> [brillo 0-255]"
+    return 1
+  fi
+
+  local clean_hex="${hex_input#'#'}"
+  if [[ ! "$clean_hex" =~ ^[0-9a-fA-F]{6}$ ]]; then
+    echo "Error: Formato hexadecimal no válido." >&2
+    return 1
+  fi
+
+  local query="hex=${clean_hex}"
+  if [[ -n "$bri_input" && "$bri_input" =~ ^[0-9]+$ ]]; then
+    query="${query}&b=${bri_input}"
+  fi
+
+  local host_used
+  if host_used=$(send_http "$query"); then
+    echo "✓ Color #${clean_hex} enviado con éxito vía ${host_used}."
+  else
+    echo "✗ Error al conectar con el ESP32." >&2
+    return 1
+  fi
+}
+
+# Consulta de estado del ESP32
+cmd_status() {
+  echo "Consultando estado del ESP32..."
+  local res
+  res=$(curl -s --connect-timeout 2 --max-time 3 "http://${MDNS_HOST}/status" 2>/dev/null)
+  if [[ -z "$res" ]]; then
+    res=$(curl -s --connect-timeout 2 --max-time 3 "http://${FALLBACK_IP}/status" 2>/dev/null)
+  fi
+
+  if [[ -n "$res" ]]; then
+    echo "Respuesta ESP32: $res"
+  else
+    echo "✗ No se pudo contactar al ESP32 en ${MDNS_HOST} ni en ${FALLBACK_IP}" >&2
+    return 1
+  fi
+}
+
+cmd_json() {
+  local theme
+  theme=$(get_current_theme)
+  local nl=false
+  is_nightlight_active && nl=true
+
+  local res
+  res=$(curl -s -f --connect-timeout 1.2 --max-time 2.0 "http://${MDNS_HOST}/status" 2>/dev/null || curl -s -f --connect-timeout 1.2 --max-time 2.0 "http://${FALLBACK_IP}/status" 2>/dev/null)
+
+  if [[ -n "$res" ]]; then
+    echo "$res" | jq -c --arg theme "$theme" --argjson nl "$nl" '. + {connected: true, theme: $theme, nightlight: $nl}' 2>/dev/null || \
+      echo "{\"connected\":true,\"theme\":\"$theme\",\"nightlight\":$nl}"
+  else
+    echo "{\"connected\":false,\"theme\":\"$theme\",\"nightlight\":$nl}"
+  fi
+}
+
+cmd_power() {
+  local state="${1:-toggle}"
+  local res
+  res=$(curl -s -f --connect-timeout 1.5 --max-time 2.5 "http://${MDNS_HOST}/power?state=${state}" 2>/dev/null || curl -s -f --connect-timeout 1.5 --max-time 2.5 "http://${FALLBACK_IP}/power?state=${state}" 2>/dev/null)
+  if [[ -n "$res" ]]; then
+    echo "$res"
+  else
+    echo "NO_ENDPOINT"
+    return 2
+  fi
+}
+
+# Ayuda
+cmd_help() {
+  echo "omarchy-leds - Control y sincronización de tira WS2812B con Omarchy"
+  echo
+  echo "Uso:"
+  echo "  omarchy-leds sync [tema]             Sincroniza los LEDs con el tema activo"
+  echo "  omarchy-leds save <hex> [brillo]     Guarda un color para el tema actual en .conf"
+  echo "  omarchy-leds set <hex> [brillo]      Aplica un color temporal directamente"
+  echo "  omarchy-leds nightlight [acción]     Control modo noche: on, off, toggle, status"
+  echo "  omarchy-leds battery-low [nivel]     Ejecuta alerta visual de batería baja"
+  echo "  omarchy-leds power [on|off|toggle]   Control de encendido/apagado"
+  echo "  omarchy-leds status                  Muestra estado del ESP32"
+  echo "  omarchy-leds json                    Muestra estado en JSON para widgets QML"
+  echo "  omarchy-leds help                    Muestra esta ayuda"
+}
+
+# Despacho de subcomandos
+case "${1:-sync}" in
+  sync)
+    cmd_sync "$2"
+    ;;
+  save)
+    cmd_save "$2" "$3"
+    ;;
+  set)
+    cmd_set "$2" "$3"
+    ;;
+  nightlight)
+    cmd_nightlight "$2"
+    ;;
+  battery-low)
+    cmd_battery_low "$2"
+    ;;
+  power)
+    cmd_power "$2"
+    ;;
+  json)
+    cmd_json
+    ;;
+  status)
+    cmd_status
+    ;;
+  help|--help|-h)
+    cmd_help
+    ;;
+  *)
+    if [[ "$1" =~ ^[a-zA-Z0-9_-]+$ ]] && [[ "$1" != -* ]]; then
+      cmd_sync "$1"
+    else
+      echo "Comando desconocido: '$1'"
+      cmd_help
+      exit 1
+    fi
+    ;;
+esac
