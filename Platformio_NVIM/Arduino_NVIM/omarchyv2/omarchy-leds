@@ -228,6 +228,96 @@ cmd_save() {
   cmd_sync "$current_theme"
 }
 
+# Lista los overrides manuales de theme-colors.conf en JSON (para el widget QML)
+cmd_overrides() {
+  local current
+  current=$(get_current_theme)
+
+  local rows=""
+  if [[ -f "$CONFIG_FILE" ]]; then
+    # Normaliza cada línea válida a: tema<TAB>hex<TAB>brillo(opcional)
+    rows=$(awk '
+      /^[[:space:]]*#/ { next }
+      /^[[:space:]]*$/ { next }
+      {
+        eq = index($0, "=")
+        if (eq <= 0) next
+        t = substr($0, 1, eq - 1)
+        v = substr($0, eq + 1)
+        gsub(/[[:space:]\r]/, "", t)
+        gsub(/[[:space:]\r]/, "", v)
+        if (t == "" || v == "") next
+        hex = v
+        bri = ""
+        c = index(v, ",")
+        if (c > 0) { hex = substr(v, 1, c - 1); bri = substr(v, c + 1) }
+        sub(/^#/, "", hex)
+        hex = tolower(hex)
+        if (hex !~ /^[0-9a-f]{6}$/) next
+        if (bri !~ /^[0-9]+$/) bri = ""
+        print t "\t" hex "\t" bri
+      }
+    ' "$CONFIG_FILE")
+  fi
+
+  if command -v jq >/dev/null 2>&1; then
+    printf '%s' "$rows" | jq -R -s -c \
+      --arg current "$current" --arg config "$CONFIG_FILE" '
+      [ split("\n")[] | select(length > 0) | split("\t")
+        | { theme: .[0], hex: .[1],
+            bri: (if ((.[2] // "") == "") then null else (.[2] | tonumber) end) }
+      ] as $items
+      | { current: $current, config: $config,
+          overrides: ($items | map(. + { active: (.theme == $current) })) }'
+  else
+    # Fallback sin jq (mínimo pero funcional)
+    local out="" first=1 t h b item act bjson
+    while IFS=$'\t' read -r t h b; do
+      [[ -z "$t" ]] && continue
+      bjson="null"; [[ "$b" =~ ^[0-9]+$ ]] && bjson="$b"
+      act="false"; [[ "$t" == "$current" ]] && act="true"
+      item=$(printf '{"theme":"%s","hex":"%s","bri":%s,"active":%s}' "$t" "$h" "$bjson" "$act")
+      if (( first )); then out="$item"; first=0; else out="${out},${item}"; fi
+    done <<< "$rows"
+    printf '{"current":"%s","config":"%s","overrides":[%s]}\n' "$current" "$CONFIG_FILE" "$out"
+  fi
+}
+
+# Elimina el override manual de un tema (por defecto, el tema activo) y re-sincroniza
+cmd_unset() {
+  local theme_input="$1"
+  local theme_name="${theme_input:-$(get_current_theme)}"
+
+  if [[ -z "$theme_name" ]]; then
+    echo "Error: No se pudo determinar el tema activo (y no se especificó ninguno)." >&2
+    return 1
+  fi
+
+  if [[ ! -f "$CONFIG_FILE" ]]; then
+    echo "No hay colores guardados en theme-colors.conf."
+    return 0
+  fi
+
+  # Escapar metacaracteres de regex para grep/sed de forma segura
+  local esc
+  esc=$(printf '%s' "$theme_name" | sed -E 's/[][\\.^$*+?(){}|/]/\\&/g')
+
+  if ! grep -qE "^[[:space:]]*${esc}[[:space:]]*=" "$CONFIG_FILE"; then
+    echo "No hay color guardado para '${theme_name}'."
+    return 0
+  fi
+
+  sed -i -E "/^[[:space:]]*${esc}[[:space:]]*=/d" "$CONFIG_FILE"
+  echo "✓ Color manual eliminado para '${theme_name}'."
+
+  local current
+  current=$(get_current_theme)
+  if [[ "$theme_name" == "$current" ]]; then
+    echo "Re-sincronizando con el color del tema/predeterminado..."
+    cmd_sync "$current"
+  fi
+}
+
 # Alerta de batería baja
 cmd_battery_low() {
   local level="${1:-15}"
@@ -393,6 +483,8 @@ cmd_help() {
   echo "Uso:"
   echo "  omarchy-leds sync [tema]             Sincroniza los LEDs con el tema activo"
   echo "  omarchy-leds save <hex> [brillo]     Guarda un color para el tema actual en .conf"
+  echo "  omarchy-leds overrides               Lista los colores manuales por tema (JSON)"
+  echo "  omarchy-leds unset [tema]            Elimina el color manual de un tema (por defecto el activo)"
   echo "  omarchy-leds set <hex> [brillo]      Aplica un color temporal directamente"
   echo "  omarchy-leds nightlight [acción]     Control modo noche: on, off, toggle, status"
   echo "  omarchy-leds battery-low [nivel]     Ejecuta alerta visual de batería baja"
@@ -409,6 +501,12 @@ case "${1:-sync}" in
     ;;
   save)
     cmd_save "$2" "$3"
+    ;;
+  overrides|overrides-json|list)
+    cmd_overrides
+    ;;
+  unset|remove)
+    cmd_unset "$2"
     ;;
   set)
     cmd_set "$2" "$3"
