@@ -1,0 +1,98 @@
+; =========================================================================
+; MACRO TERATERM: Auditoria e Ingesta de Telemetria Data Center (.ttl)
+; AUTOR: Senior Embedded Firmware Engineer
+; PROPOSITO:
+;   - Conexion autonoma al puerto serie del Arduino (9600 baudios, 8-N-1).
+;   - Lectura no bloqueada de lineas JSON delimitadas por \n.
+;   - Estampado de fecha y hora local de la PC en formato ISO 8601 (YYYY-MM-DDTHH:MM:SS).
+;   - Registro seguro en archivo de auditoria 'datacenter.log' con vaciado a disco.
+;
+; CORRECCIONES DE SINTAXIS TTL (version anterior no ejecutaba):
+;   1) sprintf es un COMANDO, no una funcion: no admite parentesis ni comas y
+;      su resultado queda siempre en la variable de sistema "inputstr".
+;   2) connect espera '/C=<n>' CON signo igual (documentado '/C=4'), no '/C4'.
+;   3) setbaud es un comando de comunicacion y NO puede usarse antes de
+;      connect (no hay enlace con Tera Term todavia). El baudrate se fija en
+;      la propia linea de conexion con la opcion /BAUD=.
+;   4) recvln NO acepta argumentos: la linea recibida queda en "inputstr" y
+;      "result" vale 1 si llego la linea, 0 si no.
+;   5) 'logwriteln' NO existe en TTL: la linea se escribe con logwrite y el
+;      salto de linea con el caracter #13#10 (patron de la doc oficial).
+;   6) 'flushlog' NO existe en TTL: el vaciado real a disco se consigue
+;      cerrando (logclose) y reabriendo (logopen) el archivo.
+; =========================================================================
+
+; --- 1. PARAMETROS DE COMUNICACION Y AUDITORIA ---
+PUERTO_COM       = 4                ; COM4 en Windows (CH340 pasante a la VM)
+BAUDIOS          = 9600             ; 9600 8-N-1
+ARCHIVO_LOG      = 'datacenter.log'
+FLUSH_CADA_TRAMA = 1                ; 1 = vaciar a disco en cada trama (mas seguro)
+
+; --- 2. CONFIGURACION Y APERTURA DEL PUERTO SERIAL ---
+; sprintf <FORMATO> [<argumento>...]  -> deja el texto formateado en inputstr
+; '/DS' evita el dialogo emergente de "New connection" al arrancar Tera Term.
+sprintf '/C=%d /BAUD=%d /DS' PUERTO_COM BAUDIOS
+
+connect inputstr                    ; Resultado: "/C=4 /BAUD=9600 /DS"
+
+; Validacion de conexion: result = 2 indica enlace Y conexion establecidos
+; (0 = sin enlace con Tera Term, 1 = enlazado pero sin conexion al puerto)
+if result != 2 then
+    sprintf2 mensaje_error 'Error critico: no se pudo abrir COM%d a %d baudios. Revise el cable USB del Arduino, que el puerto exista y su numero en el Administrador de dispositivos.' PUERTO_COM BAUDIOS
+    messagebox mensaje_error 'Data Center - Fallo de Comunicacion'
+    end
+endif
+
+; --- 3. APERTURA DEL ARCHIVO DE AUDITORIA (MODO APPEND, SIN DIALOGO) ---
+; logopen <archivo> <binario:0> <append:1> <texto_plano:0> <timestamp:0> <ocultar_dialogo:1>
+logopen ARCHIVO_LOG 0 1 0 0 1
+
+; Estampado de cabecera de auditoria al arrancar la sesion
+getdate fecha_str '%Y-%m-%d'
+gettime hora_str  '%H:%M:%S'
+logwrite fecha_str
+logwrite 'T'
+logwrite hora_str
+logwrite ' [AUDITORIA] INICIO DE SESION DE TELEMETRIA DATA CENTER'
+logwrite #13#10
+
+; --- 4. BUCLE DE INGESTA CONTINUA (SIN PERDIDA DE TRAMAS) ---
+while 1
+    ; recvln se bloquea hasta recibir una linea completa terminada en LF (\n).
+    ; La linea queda en inputstr y result = 1 si la recepcion fue correcta.
+    recvln
+
+    if result = 0 then
+        ; Enlace terminado o linea perdida: se sale del bucle para cerrar limpio
+        break
+    endif
+
+    ; logwrite con cadena vacia produce error de sintaxis: se descarta la linea
+    strlen inputstr
+    if result > 0 then
+        ; Obtener timestamp del sistema operativo de la estacion de monitoreo
+        getdate fecha_str '%Y-%m-%d'
+        gettime hora_str  '%H:%M:%S'
+
+        ; Entrada de auditoria: [ISO_TIMESTAMP] [espacio] JSON_PAYLOAD + salto
+        logwrite fecha_str
+        logwrite 'T'
+        logwrite hora_str
+        logwrite ' '
+        logwrite inputstr
+        logwrite #13#10
+
+        ; Vaciado real a disco: TTL no dispone de comando de flush, por lo que
+        ; se cierra el archivo y se reabre en modo append (coste despreciable
+        ; a una trama cada 2 segundos). Garantiza no perder datos ante corte.
+        if FLUSH_CADA_TRAMA != 0 then
+            logclose
+            logopen ARCHIVO_LOG 0 1 0 0 1
+        endif
+    endif
+endwhile
+
+; --- 5. CIERRE SEGURO (alcanzable por 'break' o al terminar la macro) ---
+logclose
+disconnect
+end

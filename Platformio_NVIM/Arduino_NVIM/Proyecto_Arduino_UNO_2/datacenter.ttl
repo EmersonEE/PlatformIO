@@ -1,0 +1,44 @@
+; datacenter.ttl — Ingesta y auditoria DataCenter (un solo boton)
+; Escucha COM8 a 9600, guarda telemetria JSON con timestamp ISO de la PC.
+; Uso: macro datacenter.ttl (TeraTerm la ejecuta de una vez).
+
+COMPORT = 8
+BAUD = 9600
+LOGFILE = 'datacenter.log'
+
+; --- Conexion serial fisica ---
+setbaud BAUD
+connect sprintf('/C%d', COMPORT)
+if result != 2 then
+  messagebox 'No se pudo abrir COM8 a 9600. Revisa COMPIM/COM7-COM8.' 'DataCenter'
+  end
+endif
+
+; --- Log plano, append ---
+logopen LOGFILE 0 1
+; Estampa cabecera ISO de inicio
+getdate datestr '%Y-%m-%d'
+gettime timestr '%H:%M:%S'
+logwrite datestr
+logwrite 'T'
+logwrite timestr
+logwriteln ' SYSTEM_START'
+
+; --- Bucle de ingesta (no pierde paquetes: lee por linea \n) ---
+while 1
+  recvln line            ; bloquea hasta '\n' (Arduino termina cada JSON con println)
+  if result > 0 then
+    getdate datestr '%Y-%m-%d'
+    gettime timestr '%H:%M:%S'
+    logwrite datestr
+    logwrite 'T'
+    logwrite timestr
+    logwrite ' '
+    logwriteln line
+    flushlog
+  endif
+endwhile
+
+logclose
+disconnect
+end
